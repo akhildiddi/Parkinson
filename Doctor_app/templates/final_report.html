@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-center">Final Report for {{ patient.name }}</h1>
+  <p class="lead text-center">Prediction: {{ prediction }}</p>
+
+  <h3 class="mt-4">Generated Reports:</h3>
+  <ul class="list-group mb-4">
+    {% for report in reports %}
+    <li class="list-group-item">
+      <a href="/static/final_reports/{{ report }}" target="_blank">{{ report }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h4>Select a Report to Send:</h4>
+  <form action="/send_to_patient" method="post" class="form-inline">
+    <input type="hidden" name="patient_username" value="{{ patient.username }}" />
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="report" class="sr-only">Select Report:</label>
+      <select name="report" class="form-control" required>
+        {% for report in reports %}
+        <option value="{{ report }}">{{ report }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Send to Patient</button>
+  </form>
+</div>
+{% endblock %}

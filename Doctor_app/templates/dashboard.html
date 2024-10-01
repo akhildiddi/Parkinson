@@ -1,0 +1,168 @@
+{% extends "base.html" %} {% block content %}
+<head>
+  <style>
+    body {
+      background-color: #f8f9fa; /* Light background for better contrast */
+    }
+
+    h2,
+    h3 {
+      color: #343a40; /* Darker color for headings */
+    }
+
+    .card {
+      transition: transform 0.3s; /* Smooth scaling */
+    }
+
+    .card:hover {
+      transform: scale(1.05); /* Scale effect on hover */
+    }
+
+    .btn-primary {
+      background-color: #007bff; /* Primary button color */
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    .btn-warning {
+      background-color: #ffc107; /* Warning button color */
+      border: none; /* Remove border */
+    }
+
+    .btn-danger {
+      background-color: #dc3545; /* Danger button color */
+      border: none; /* Remove border */
+    }
+
+    .notifications {
+      margin-top: 30px;
+    }
+
+    .no-notifications {
+      color: #ffc107; /* Warning color for no notifications */
+      font-weight: bold;
+    }
+
+    /* Styles for the machine learning paragraphs */
+    .ml-paragraph {
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for the box */
+    }
+
+    .ml-paragraph p {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #343a40;
+    }
+
+    .ml-paragraph img {
+      max-width: 100%; /* Ensure image is responsive */
+      height: auto;
+      margin-top: 10px;
+    }
+
+    .ml-paragraph-1 {
+      background-color: #d4edda; /* Light green background */
+    }
+
+    .ml-paragraph-2 {
+      background-color: #f8d7da; /* Light red background */
+    }
+    .Question {
+      color: maroon;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .ml-paragraph img {
+        width: 100%; /* Full width on smaller screens */
+      }
+    }
+  </style>
+</head>
+
+<h2 class="text-center my-4">Dashboard</h2>
+<p class="text-center">Welcome, {{ doctor.name }}!</p>
+
+<h3 class="text-center">Notifications:</h3>
+<div class="row">
+  {% if notifications %} {% for notification in notifications %}
+  <div class="col-md-4 mb-4">
+    <div class="card shadow-sm border-primary">
+      <div class="card-body">
+        <h5 class="card-title">Report from {{ notification.patient_name }}</h5>
+        <p class="card-text">
+          <strong>Date:</strong> {{ notification.date }}<br />
+        </p>
+        <!-- Download report button -->
+        <a
+          href="/download-report?notification_id={{ notification.id }}"
+          class="btn btn-primary"
+          >Download Report</a
+        >
+
+        <!-- Analyze report form (POST request) -->
+        <form action="/analyze-report" method="post" style="display: inline">
+          <input
+            type="hidden"
+            name="notification_id"
+            value="{{ notification.id }}"
+          />
+          <button type="submit" class="btn btn-warning">Analyze Report</button>
+        </form>
+
+        <!-- Delete notification form (POST request) -->
+        <form
+          method="post"
+          action="/delete-notification"
+          style="display: inline"
+        >
+          <input
+            type="hidden"
+            name="notification_id"
+            value="{{ notification.id }}"
+          />
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <p class="text-center no-notifications">No new notifications.</p>
+  {% endif %}
+</div>
+
+<!-- Machine Learning SVC Model Explanation with two paragraphs and images -->
+<div class="row">
+  <div class="col-md-6">
+    <div class="ml-paragraph ml-paragraph-1">
+      <h4 class="Question">Machine Learning: SVC for Disease Prediction</h4>
+      <p>
+        Support Vector Classifier (SVC) is a powerful machine learning model
+        used for classification tasks. In the context of disease prediction, it
+        can be trained to recognize patterns in patient data to differentiate
+        between healthy individuals and those potentially affected by certain
+        conditions.
+      </p>
+      <img src="static/images/ml_model_1.png" alt="SVC Model Diagram 1" />
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="ml-paragraph ml-paragraph-2">
+      <h4 class="Question">How SVC Recognizes Disease</h4>
+      <p>
+        The SVC model identifies key features in the data, such as symptoms,
+        medical history, and test results, to make predictions about the
+        likelihood of a disease. By analyzing these inputs, the model can help
+        doctors make more accurate and faster diagnoses.
+      </p>
+      <img src="static/images/ml_model_2.png" alt="SVC Model Diagram 2" />
+    </div>
+  </div>
+</div>
+
+{% endblock %}

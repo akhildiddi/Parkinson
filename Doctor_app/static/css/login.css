@@ -1,0 +1,33 @@
+/* Background with Image and Gradient Overlay */
+body {
+  background: linear-gradient(
+      to bottom,
+      rgba(195, 230, 203, 0.6),
+      rgba(255, 255, 255, 0.6)
+    ),
+    url("/static/images/green-background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Centering the form in the middle of the page */
+.login-form-wrapper {
+  background: rgba(255, 255, 255, 0.3); /* Semi-transparent white background */
+  padding: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px); /* Glassy effect */
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Light border for better separation */
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+  .login-form-wrapper {
+    width: 90%;
+  }
+}

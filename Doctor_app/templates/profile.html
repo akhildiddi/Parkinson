@@ -1,0 +1,64 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mt-5">
+  <h1>Your Profile</h1>
+
+  <div class="text-center mb-4">
+    {% if doctor.profile_pic %}
+    <img
+      src="{{ doctor.profile_pic }}"
+      alt="Profile Picture"
+      class="img-fluid rounded-circle"
+      style="width: 150px; height: 150px"
+    />
+    {% else %}
+    <span style="font-size: 150px">👤</span>
+    <!-- User emoji -->
+    {% endif %}
+  </div>
+
+  <form
+    action="/upload_profile_pic"
+    method="post"
+    enctype="multipart/form-data"
+    class="mb-4"
+  >
+    <div class="form-group">
+      <label for="profile_pic">Upload Profile Picture:</label>
+      <input
+        type="file"
+        class="form-control-file"
+        id="profile_pic"
+        name="profile_pic"
+        accept="image/*"
+        onchange="previewImage(event)"
+      />
+    </div>
+    <div class="mt-2">
+      <img
+        id="preview"
+        alt="Image Preview"
+        class="img-fluid rounded-circle"
+        style="display: none; width: 150px; height: 150px"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Upload</button>
+  </form>
+
+  <h4>Details</h4>
+  <p>Name: {{ doctor.name }}</p>
+  <p>Email: {{ doctor.email }}</p>
+  <p>Qualification: {{ doctor.qualification }}</p>
+  <p>Position: {{ doctor.position }}</p>
+
+  <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+  <a href="/logout" class="btn btn-danger">Logout</a>
+</div>
+
+<script>
+  function previewImage(event) {
+    const preview = document.getElementById("preview");
+    preview.src = URL.createObjectURL(event.target.files[0]);
+    preview.style.display = "block";
+  }
+</script>
+{% endblock %}

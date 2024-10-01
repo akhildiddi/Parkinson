@@ -1,0 +1,112 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mt-4">
+  <!-- First Row: Image on the left, Text on the right with distinct background color -->
+  <div class="row mb-5">
+    <div class="col-md-6">
+      <img
+        src="/static/images/1.png"
+        class="img-fluid rounded shadow-lg"
+        alt="Image 1"
+        style="transition: transform 0.3s ease"
+      />
+    </div>
+    <div class="col-md-6 d-flex align-items-center">
+      <div
+        class="p-4 text-dark"
+        style="background: #e3f2fd; border-radius: 15px"
+      >
+        <p>
+          Parkinson's disease is a progressive neurological disorder that
+          affects movement and coordination. It occurs due to the gradual loss
+          of dopamine-producing neurons in a region of the brain called the
+          substantia nigra. Dopamine is a critical neurotransmitter that helps
+          regulate smooth, controlled movements. As dopamine levels drop,
+          individuals experience symptoms like tremors, stiffness, slowness of
+          movement, and difficulty with balance and coordination.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Row: Text on the left, Image on the right with different background color -->
+  <div class="row mb-5">
+    <div class="col-md-6 order-md-2">
+      <img
+        src="/static/images/2.jpg"
+        class="img-fluid rounded shadow-lg"
+        alt="Image 2"
+        style="transition: transform 0.3s ease"
+      />
+    </div>
+    <div class="col-md-6 d-flex align-items-center order-md-1">
+      <div
+        class="p-4 text-dark"
+        style="background: #fff3e0; border-radius: 15px"
+      >
+        <p>
+          The exact cause of Parkinson’s disease is unknown, but research
+          suggests that a combination of genetic and environmental factors may
+          contribute to its onset. Certain genetic mutations are linked to the
+          disease, while exposure to toxins like pesticides and heavy metals has
+          been associated with an increased risk. However, no specific trigger
+          has been definitively identified.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Third Row: Image on the left, Text on the right with varied background color -->
+  <div class="row mb-5">
+    <div class="col-md-6">
+      <img
+        src="/static/images/3.webp"
+        class="img-fluid rounded shadow-lg"
+        alt="Image 3"
+        style="transition: transform 0.3s ease"
+      />
+    </div>
+    <div class="col-md-6 d-flex align-items-center">
+      <div
+        class="p-4 text-dark"
+        style="background: #f1f8e9; border-radius: 15px"
+      >
+        <p>
+          While there is currently no cure for Parkinson's, treatments can help
+          manage its symptoms. Medications like levodopa help replenish dopamine
+          levels in the brain, and other therapies, such as deep brain
+          stimulation, may offer relief for advanced cases. In addition to
+          medication, physical therapy and lifestyle changes can improve
+          mobility and quality of life.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+<style>
+  img:hover {
+    transform: scale(1.05);
+  }
+
+  p {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #333;
+  }
+
+  /* Adjust spacing for different screen sizes */
+  @media (max-width: 768px) {
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  /* More spacing and scaling for large screens */
+  @media (min-width: 1200px) {
+    p {
+      font-size: 1.3rem;
+    }
+  }
+</style>

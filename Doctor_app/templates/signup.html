@@ -1,0 +1,78 @@
+{% extends "base.html" %} {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', path='css/signup.css') }}" />
+<div
+  class="container-fluid min-vh-100 d-flex justify-content-center align-items-center"
+>
+  <div class="signup-form-wrapper">
+    <h2 class="text-center">Sign Up</h2>
+    <form action="/signup" method="post">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="qualification">Qualification</label>
+        <input
+          type="text"
+          id="qualification"
+          name="qualification"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="position">Position</label>
+        <input
+          type="text"
+          id="position"
+          name="position"
+          class="form-control"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-light-green btn-block">
+        Sign Up
+      </button>
+      <p class="text-center mt-2">
+        Already have an account? <a href="/login">Login</a>
+      </p>
+    </form>
+  </div>
+</div>
+{% endblock %}

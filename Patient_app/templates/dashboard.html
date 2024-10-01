@@ -1,0 +1,177 @@
+{% extends "base.html" %} {% block content %}
+<head>
+  <style>
+    body {
+      background-color: #f8f9fa; /* Light background for better contrast */
+    }
+
+    .card {
+      transition: transform 0.3s; /* Smooth scaling */
+    }
+
+    .card:hover {
+      transform: scale(1.05); /* Scale effect on hover */
+    }
+
+    .list-group-item {
+      transition: background-color 0.3s;
+    }
+
+    .list-group-item:hover {
+      background-color: #e2e6ea; /* Highlight effect on hover */
+    }
+
+    h2,
+    h3 {
+      color: #343a40; /* Darker color for headings */
+    }
+
+    .btn-success {
+      background-color: #28a745; /* Bootstrap success button color */
+      border: none; /* Remove border */
+    }
+
+    .btn-success:hover {
+      background-color: #218838; /* Darker green on hover */
+    }
+
+    .text-warning {
+      color: #ffc107; /* Warning text color */
+    }
+
+    .user-badge {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #e9ecef; /* Light gray background */
+      font-size: 50px; /* Large font size for emoji */
+      color: #6c757d; /* Text color */
+    }
+
+    /* Styling for the question/answer sections */
+    .qa-section {
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for block effect */
+    }
+
+    .qa-section img {
+      max-width: 100%; /* Ensure image is responsive */
+      height: auto;
+      margin-top: 10px;
+    }
+
+    .qa-1 {
+      background-color: #d1ecf1; /* Light blue background */
+    }
+
+    .qa-2 {
+      background-color: #f8d7da; /* Light pink background */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .qa-section img {
+        width: 100%; /* Full width on smaller screens */
+      }
+    }
+  </style>
+</head>
+
+<h2 class="text-center my-4">Dashboard</h2>
+
+<!-- Doctors List -->
+<div class="row">
+  {% if doctors %} {% for doctor in doctors %}
+  <div class="col-md-4 mb-4">
+    <div class="card shadow-sm border-primary">
+      {% if doctor.profile_pic %}
+      <img
+        src="{{ doctor.profile_pic }}"
+        class="card-img-top"
+        alt="{{ doctor.name }}"
+        onerror="this.onerror=null; this.src='/static/default_user.png';"
+        style="width: 100%; height: 200px"
+      />
+      {% else %}
+      <div class="user-badge">👤</div>
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title text-primary">{{ doctor.name }}</h5>
+        <p class="card-text">
+          <strong>Qualification:</strong> {{ doctor.qualification }}<br />
+          <strong>Position:</strong> {{ doctor.position }}<br />
+          <strong>Email:</strong> {{ doctor.email }}
+        </p>
+        <a href="/send-report?doctor_id={{ doctor.id }}" class="btn btn-success"
+          >Send Report to this Doctor</a
+        >
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <p class="text-warning">No doctors found.</p>
+  {% endif %}
+</div>
+
+<!-- Notifications -->
+<h3 class="mt-5 mb-3 text-center">Your Notifications</h3>
+<div class="notifications">
+  {% if notifications %}
+  <ul class="list-group">
+    {% for notification in notifications %}
+    <li class="list-group-item list-group-item-action">
+      <strong>From:</strong> Dr. {{ notification.doctor_name }}<br />
+      <strong>Date:</strong> {{ notification.date }}<br />
+      <a
+        href="/download-report?notification_id={{ notification.id }}"
+        class="btn btn-secondary btn-sm"
+        >Download Final Report</a
+      >
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="text-warning">No notifications.</p>
+  {% endif %}
+</div>
+
+<!-- Question 1: Doctor Verification -->
+<div class="qa-section qa-1">
+  <h4>Is the doctor verified?</h4>
+  <p>
+    Yes, all doctors listed on our platform are verified and selected by a team
+    of professionals. They undergo a strict verification process to ensure their
+    qualifications and experience meet the required standards. This helps ensure
+    that patients are connected with trustworthy and experienced doctors.
+  </p>
+  <img
+    src="static/images/verified_doctor.jpg"
+    alt="Verified Doctor"
+    width="500px"
+    height="500px"
+  />
+</div>
+
+<!-- Question 2: Disease Detection -->
+<div class="qa-section qa-2">
+  <h4>How do doctors detect diseases?</h4>
+  <p>
+    Doctors on our platform use state-of-the-art techniques such as machine
+    learning models like the Support Vector Classifier (SVC). These models help
+    analyze patient data, including symptoms and test results, to detect
+    diseases with high accuracy, allowing doctors to provide the best possible
+    diagnosis.
+  </p>
+  <img
+    src="static/images/disease_detection.jpg"
+    alt="Disease Detection"
+    width="500px"
+    height="500px"
+  />
+</div>
+
+{% endblock %}

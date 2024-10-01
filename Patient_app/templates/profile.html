@@ -1,0 +1,61 @@
+{% extends "base.html" %} {% block title %}Profile{% endblock %} {% block
+extra_styles %}
+<style>
+  .profile-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 30px;
+  }
+
+  .profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .profile-header h1 {
+    color: #004085;
+  }
+
+  .profile-info {
+    margin-bottom: 20px;
+  }
+
+  .profile-info p {
+    font-size: 18px;
+    color: #333;
+  }
+
+  .btn-custom {
+    background-color: #004085;
+    color: #ffffff;
+    border: none;
+  }
+
+  .btn-custom:hover {
+    background-color: #00376b;
+    color: #ffffff;
+  }
+</style>
+{% endblock %} {% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="profile-container">
+        <div class="profile-header">
+          <h1>Your Profile</h1>
+        </div>
+        <div class="profile-info">
+          <p><strong>Username:</strong> {{ patient.username }}</p>
+          <p><strong>Email:</strong> {{ patient.email }}</p>
+        </div>
+        <div class="text-center">
+          <a href="/dashboard" class="btn btn-custom">Back to Dashboard</a>
+          <a href="/logout" class="btn btn-custom">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

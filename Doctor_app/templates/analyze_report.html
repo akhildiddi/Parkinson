@@ -1,0 +1,307 @@
+{% extends "base.html" %} {% block content %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', path='css/analyze_report.css') }}"
+/>
+
+<div class="container my-5">
+  <h2 class="text-center">Analyze Report</h2>
+  <p class="text-center">
+    Notification ID: <strong>{{ notification_id }}</strong>
+  </p>
+
+  <!-- Form to upload the PDF and detect text -->
+  <form
+    action="/detect-text"
+    method="post"
+    enctype="multipart/form-data"
+    class="mb-4"
+  >
+    <input type="hidden" name="notification_id" value="{{ notification_id }}" />
+    <div class="form-group">
+      <label for="pdf_file">Upload Report PDF</label>
+      <input
+        type="file"
+        name="pdf_file"
+        id="pdf_file"
+        class="form-control"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Detect Text</button>
+  </form>
+
+  <hr />
+
+  <h3>Detected Data (or Manual Input):</h3>
+  <form action="/final-report" method="post">
+    <input type="hidden" name="notification_id" value="{{ notification_id }}" />
+
+    <div class="form-group">
+      <label for="mdvp_fo">MDVP:Fo(Hz)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="mdvp_fo"
+        name="mdvp_fo"
+        value="{{ detected_data['MDVP:Fo(Hz)'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="mdvp_fhi">MDVP:Fhi(Hz)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="mdvp_fhi"
+        name="mdvp_fhi"
+        value="{{ detected_data['MDVP:Fhi(Hz)'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="mdvp_flo">MDVP:Flo(Hz)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="mdvp_flo"
+        name="mdvp_flo"
+        value="{{ detected_data['MDVP:Flo(Hz)'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="mdvp_jitter">MDVP:Jitter(%)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="mdvp_jitter"
+        name="mdvp_jitter"
+        value="{{ detected_data['MDVP:Jitter(%)'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="mdvp_jitter_abs">MDVP:Jitter(Abs)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="mdvp_jitter_abs"
+        name="mdvp_jitter_abs"
+        value="{{ detected_data['MDVP:Jitter(Abs)'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="mdvp_rap">MDVP:RAP</label>
+      <input
+        type="text"
+        class="form-control"
+        id="mdvp_rap"
+        name="mdvp_rap"
+        value="{{ detected_data['MDVP:RAP'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="mdvp_ppq">MDVP:PPQ</label>
+      <input
+        type="text"
+        class="form-control"
+        id="mdvp_ppq"
+        name="mdvp_ppq"
+        value="{{ detected_data['MDVP:PPQ'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="jitter_ddp">Jitter:DDP</label>
+      <input
+        type="text"
+        class="form-control"
+        id="jitter_ddp"
+        name="jitter_ddp"
+        value="{{ detected_data['Jitter:DDP'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="mdvp_shimmer">MDVP:Shimmer</label>
+      <input
+        type="text"
+        class="form-control"
+        id="mdvp_shimmer"
+        name="mdvp_shimmer"
+        value="{{ detected_data['MDVP:Shimmer'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="mdvp_shimmer_db">MDVP:Shimmer(dB)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="mdvp_shimmer_db"
+        name="mdvp_shimmer_db"
+        value="{{ detected_data['MDVP:Shimmer(dB)'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="shimmer_apq3">Shimmer:APQ3</label>
+      <input
+        type="text"
+        class="form-control"
+        id="shimmer_apq3"
+        name="shimmer_apq3"
+        value="{{ detected_data['Shimmer:APQ3'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="shimmer_apq5">Shimmer:APQ5</label>
+      <input
+        type="text"
+        class="form-control"
+        id="shimmer_apq5"
+        name="shimmer_apq5"
+        value="{{ detected_data['Shimmer:APQ5'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="mdvp_apq">MDVP:APQ</label>
+      <input
+        type="text"
+        class="form-control"
+        id="mdvp_apq"
+        name="mdvp_apq"
+        value="{{ detected_data['MDVP:APQ'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="shimmer_dda">Shimmer:DDA</label>
+      <input
+        type="text"
+        class="form-control"
+        id="shimmer_dda"
+        name="shimmer_dda"
+        value="{{ detected_data['Shimmer:DDA'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="nhr">NHR</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nhr"
+        name="nhr"
+        value="{{ detected_data['NHR'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="hnr">HNR</label>
+      <input
+        type="text"
+        class="form-control"
+        id="hnr"
+        name="hnr"
+        value="{{ detected_data['HNR'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="rpde">RPDE</label>
+      <input
+        type="text"
+        class="form-control"
+        id="rpde"
+        name="rpde"
+        value="{{ detected_data['RPDE'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="dfa">DFA</label>
+      <input
+        type="text"
+        class="form-control"
+        id="dfa"
+        name="dfa"
+        value="{{ detected_data['DFA'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="spread1">Spread1</label>
+      <input
+        type="text"
+        class="form-control"
+        id="spread1"
+        name="spread1"
+        value="{{ detected_data['spread1'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="spread2">Spread2</label>
+      <input
+        type="text"
+        class="form-control"
+        id="spread2"
+        name="spread2"
+        value="{{ detected_data['spread2'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="d2">D2</label>
+      <input
+        type="text"
+        class="form-control"
+        id="d2"
+        name="d2"
+        value="{{ detected_data['D2'] or '' }}"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="ppe">PPE</label>
+      <input
+        type="text"
+        class="form-control"
+        id="ppe"
+        name="ppe"
+        value="{{ detected_data['PPE'] or '' }}"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btn btn-success">Generate Final Report</button>
+  </form>
+</div>
+{% endblock %}

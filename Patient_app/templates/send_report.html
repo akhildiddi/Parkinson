@@ -1,0 +1,89 @@
+{% extends "base.html" %} 
+
+{% block extra_styles %}
+<style>
+  .question-block {
+    background-color: #e7f1ff; /* Light blue for question 1 */
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  .question-block-2 {
+    background-color: #f0f9e7; /* Light green for question 2 */
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  .question-block p, .question-block-2 p {
+    font-size: 16px;
+    color: #333;
+  }
+
+  @media (max-width: 768px) {
+    .question-block, .question-block-2 {
+      padding: 15px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .question-block, .question-block-2 {
+      padding: 10px;
+    }
+    .form-group {
+      margin-bottom: 10px;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<h2>Send Report to Doctor</h2>
+
+<!-- First Question Block -->
+<div class="question-block">
+  <h4>Why are you sending the report to the doctor?</h4>
+  <p>
+    The doctor will use the report to predict the likelihood of the patient having
+    Parkinson's disease. They will leverage an SVC model, a machine learning algorithm,
+    to analyze the report's data. The predictions made by the model will guide the
+    doctor in diagnosing the patient. This enables early detection and potential treatment 
+    planning based on the model's results.
+  </p>
+</div>
+
+<!-- Second Question Block -->
+<div class="question-block-2">
+  <h4>What is SVC, and how does it help detect Parkinson's disease?</h4>
+  <p>
+    SVC (Support Vector Classifier) is a machine learning algorithm that helps classify
+    data into distinct categories. In detecting Parkinson's disease, SVC is trained to 
+    differentiate between healthy and affected individuals using speech and movement data. 
+    By analyzing patterns in the report, SVC predicts whether the patient exhibits signs
+    of Parkinson's disease, aiding in early diagnosis.
+  </p>
+</div>
+
+<!-- Form for Report Submission -->
+<form action="/send-report" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="doctor_id" value="{{ doctor_id }}" />
+
+  <div class="form-group">
+    <label for="report">Upload Report:</label>
+    <input
+      type="file"
+      class="form-control"
+      id="report"
+      name="report"
+      required
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Send to Doctor</button>
+</form>
+
+{% endblock %}

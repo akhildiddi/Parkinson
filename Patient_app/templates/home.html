@@ -1,0 +1,100 @@
+{% extends "base.html" %} 
+{% block title %}Home - My FastAPI App{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <!-- First Row -->
+  <div class="row align-items-center mb-4">
+    <div class="col-md-6">
+      <img
+        src="{{ url_for('static', path='images/1.png') }}"
+        class="img-fluid"
+        alt="Image 1"
+      />
+    </div>
+    <div class="col-md-6">
+      <p class="bg-light p-3">
+        Parkinson's disease is a progressive neurological disorder that affects
+        movement and coordination. It occurs due to the gradual loss of
+        dopamine-producing neurons in a region of the brain called the
+        substantia nigra. Dopamine is a critical neurotransmitter that helps
+        regulate smooth, controlled movements. As dopamine levels drop,
+        individuals experience symptoms like tremors, stiffness, slowness of
+        movement, and difficulty with balance and coordination. Parkinson’s
+        typically develops in people over 60 but can also occur earlier in some
+        cases.
+      </p>
+    </div>
+  </div>
+
+  <!-- Second Row -->
+  <div class="row align-items-center mb-4">
+    <div class="col-md-6 order-md-2">
+      <img
+        src="{{ url_for('static', path='images/2.jpg') }}"
+        class="img-fluid"
+        alt="Image 2"
+      />
+    </div>
+    <div class="col-md-6 order-md-1">
+      <p class="bg-light p-3">
+        The exact cause of Parkinson’s disease is unknown, but research suggests
+        that a combination of genetic and environmental factors may contribute
+        to its onset. Certain genetic mutations are linked to the disease, while
+        exposure to toxins like pesticides and heavy metals has been associated
+        with an increased risk. However, no specific trigger has been
+        definitively identified. As the disease progresses, it can also affect
+        non-motor functions, such as mood, sleep, and cognition, leading to a
+        wide range of symptoms beyond just movement.
+      </p>
+    </div>
+  </div>
+
+  <!-- Third Row -->
+  <div class="row align-items-center mb-4">
+    <div class="col-md-6">
+      <img
+        src="{{ url_for('static', path='images/3.webp') }}"
+        class="img-fluid"
+        alt="Image 3"
+      />
+    </div>
+    <div class="col-md-6">
+      <p class="bg-light p-3">
+        While there is currently no cure for Parkinson's, treatments can help
+        manage its symptoms. Medications like levodopa help replenish dopamine
+        levels in the brain, and other therapies, such as deep brain
+        stimulation, may offer relief for advanced cases. In addition to
+        medication, physical therapy and lifestyle changes can improve mobility
+        and quality of life. Ongoing research is aimed at developing new
+        treatments and ultimately finding a cure for this debilitating
+        condition.
+      </p>
+    </div>
+  </div>
+
+  <!-- Fourth Paragraph -->
+  <div class="row">
+    <div class="col-12">
+      <p class="bg-light p-3"></p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .img-fluid {
+    max-height: 500px;
+  }
+  p {
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: justify;
+    background-color: #7cdb0f !important; /* Light background color */
+  }
+  @media (max-width: 768px) {
+    .img-fluid {
+      max-height: 350px;
+    }
+  }
+</style>
+{% endblock %}
